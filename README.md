@@ -27,7 +27,7 @@ Este projeto é um aplicativo React Native que realiza operações básicas de C
 
 1. Clone este repositório: 
 	```bash 
-	git clone https://github.com/seu-usuario/react-native-crud-firebase.git 
+	git clone https://github.com/seu-usuario/react-native-cloud-firestore.git 
 	```
 	```bash
 	cd react-native-cloud-firestore
