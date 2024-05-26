@@ -57,7 +57,7 @@ export default function Products({ navigation }: any) {
                 return;
             }
         } else {
-            Alert.alert('Aviso', 'Deseja realmente excluir a loja?', [{
+            Alert.alert('Aviso', 'Deseja realmente excluir o produto?', [{
                 text: 'Não',
                 onPress: () => { },
                 style: 'cancel'
