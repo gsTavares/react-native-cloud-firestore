@@ -14,8 +14,10 @@ export default function ProductList({products, onProductSelected, onProductDelet
     return (
         <>
             <ScrollView className="bg-slate-100">
-                <View className="p-6">
+                <View className="p-6 flex-row items-center justify-between">
                     <Text className="text-3xl font-bold">Produtos</Text>
+                    <Ionicons name='add-circle' size={32}
+                        onPress={() => onProductSelected()} />
                 </View>
 
                 <View className="px-6 mb-6">

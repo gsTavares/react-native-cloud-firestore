@@ -42,7 +42,7 @@ export default function Products({ navigation }: any) {
 
     }, [actionFlag])
 
-    const handleProductSelected = (product: Product) => {
+    const handleProductSelected = (product?: Product) => {
         setSelectedProduct(product);
         navigation.navigate('Gerenciar produto')
     }
