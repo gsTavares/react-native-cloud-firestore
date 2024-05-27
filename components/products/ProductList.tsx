@@ -2,6 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import colors from 'tailwindcss/colors';
 import { Product } from "../../@types/Product";
+import { useState } from 'react';
 
 type ProductListProps = {
     products: Product[]
@@ -9,7 +10,23 @@ type ProductListProps = {
     onProductDeleted: any
 }
 
-export default function ProductList({products, onProductSelected, onProductDeleted}: ProductListProps) {
+export default function ProductList({ products, onProductSelected, onProductDeleted }: ProductListProps) {
+
+    const [pesquisa, setPesquisa] = useState('');
+
+    let filteredProducts = [];
+
+    if (pesquisa !== '') {
+
+        const normalizedSearch = pesquisa.trim().toLowerCase();
+
+        filteredProducts = products.filter(product => {
+            return product.nome!.toLowerCase().includes(normalizedSearch)
+                || product.preco!.toLowerCase().includes(normalizedSearch);
+        });
+    } else {
+        filteredProducts = [...products];
+    }
 
     return (
         <>
@@ -21,11 +38,12 @@ export default function ProductList({products, onProductSelected, onProductDelet
                 </View>
 
                 <View className="px-6 mb-6">
-                    <TextInput className="rounded-xl shadow-xl bg-white p-4" placeholder="Pesquisar produto..." />
+                    <TextInput className="rounded-xl shadow-xl bg-white p-4 placeholder:opacity-50" placeholder="Pesquisar produto..."
+                        onChangeText={(value) => setPesquisa(value)} />
                 </View>
 
                 <View className="px-6 gap-6">
-                    {products.map(product => {
+                    {filteredProducts.length === 0 ? <Text className="text-center text-lg font-semibold">Nenhum produto foi encontrado!</Text> : filteredProducts.map(product => {
                         return (
                             <View key={product.id!} className="p-6 bg-blue-400 rounded-xl relative">
                                 <View>
