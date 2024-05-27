@@ -12,12 +12,21 @@ type ProductManagementProps = {
 
 export default function ProductManagement({ product, onProductSaved }: ProductManagementProps) {
 
-    const [nome, setNome] = useState(product?.nome);
-    const [marca, setMarca] = useState(product?.marca);
-    const [categoria, setCategoria] = useState(product?.categoria);
-    const [preco, setPreco] = useState(product?.preco);
+    const [nome, setNome] = useState(product?.nome ?? '');
+    const [marca, setMarca] = useState(product?.marca ?? '');
+    const [categoria, setCategoria] = useState(product?.categoria ?? '');
+    const [preco, setPreco] = useState(product?.preco ?? '');
+
+    const [submitted, setSubmitted] = useState(false);
 
     const handleProductData = async () => {
+
+        setSubmitted(true);
+
+        if(nome === '' || marca === '' || categoria === '' || preco === '') {
+            return;
+        }
+
         const productData: Product = {
             categoria: categoria,
             marca: marca,
@@ -34,6 +43,12 @@ export default function ProductManagement({ product, onProductSaved }: ProductMa
 
         onProductSaved();
 
+
+
+    }
+
+    const validateProduct = () => {
+
     }
 
     return (
@@ -45,26 +60,30 @@ export default function ProductManagement({ product, onProductSaved }: ProductMa
 
                 <View className="px-6">
                     <Text className="text-lg font-semibold pb-1">Nome do produto</Text>
-                    <TextInput className="rounded-xl shadow-xl bg-white p-4" placeholder="Nome do produto"
+                    <TextInput className={`rounded-xl shadow-xl bg-white p-4 placeholder:opacity-50 ${submitted && nome === '' ? 'border-2 border-red-600' : null}`} placeholder="Nome do produto"
                         value={nome} onChangeText={(value) => setNome(value)} />
+                    <View>{submitted && nome === '' ? <Text className="text-red-600 mt-1">O nome é obrigatório</Text> : null}</View>
                 </View>
 
                 <View className="px-6 mt-3">
                     <Text className="text-lg font-semibold pb-1">Marca</Text>
-                    <TextInput className="rounded-xl shadow-xl bg-white p-4" placeholder="Marca"
+                    <TextInput className={`rounded-xl shadow-xl bg-white p-4 placeholder:opacity-50 ${submitted && marca === '' ? 'border-2 border-red-600' : null}`} placeholder="Marca"
                         value={marca} onChangeText={(value) => setMarca(value)} />
+                    <View>{submitted && marca === '' ? <Text className="text-red-600 mt-1">A marca é obrigatória</Text> : null}</View>
                 </View>
 
                 <View className="px-6 mt-3">
                     <Text className="text-lg font-semibold pb-1">Categoria</Text>
-                    <TextInput className="rounded-xl shadow-xl bg-white p-4" placeholder="Categoria"
+                    <TextInput className={`rounded-xl shadow-xl bg-white p-4 placeholder:opacity-50 ${submitted && categoria === '' ? 'border-2 border-red-600' : null}`} placeholder="Categoria"
                         value={categoria} onChangeText={(value) => setCategoria(value)} />
+                    <View>{submitted && categoria === '' ? <Text className="text-red-600 mt-1">A categoria é obrigatória</Text> : null}</View>
                 </View>
 
                 <View className="px-6 mt-3 mb-12">
                     <Text className="text-lg font-semibold pb-1">Preço</Text>
-                    <TextInput className="rounded-xl shadow-xl bg-white p-4" placeholder="Preço"
+                    <TextInput className={`rounded-xl shadow-xl bg-white p-4 placeholder:opacity-50 ${submitted && preco === '' ? 'border-2 border-red-600' : null}`} placeholder="Preço"
                         value={preco} onChangeText={(value) => setPreco(value)} />
+                    <View>{submitted && preco === '' ? <Text className="text-red-600 mt-1">O preço é obrigatório</Text> : null}</View>
                 </View>
 
                 <View className="px-6 flex-row gap-5 justify-end items-center">
