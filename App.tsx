@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 
 import { NativeWindStyleSheet } from "nativewind";
+import Notifications from './pages/Notifications';
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -26,6 +27,11 @@ export default function App() {
           name='Produtos'
           component={Products}
           options={{ drawerLabel: 'Produtos' }}>
+        </Drawer.Screen>
+        <Drawer.Screen
+          name='Notificações'
+          component={Notifications}
+          options={{ drawerLabel: 'Notificações' }}>
         </Drawer.Screen>
       </Drawer.Navigator>
     </NavigationContainer>
