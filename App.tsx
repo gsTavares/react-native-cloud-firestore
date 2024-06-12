@@ -7,6 +7,9 @@ import Products from './pages/Products';
 
 import { NativeWindStyleSheet } from "nativewind";
 import Notifications from './pages/Notifications';
+import { useEffect } from 'react';
+
+import notifee from '@notifee/react-native';
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -15,6 +18,22 @@ NativeWindStyleSheet.setOutput({
 const Drawer = createDrawerNavigator();
 
 export default function App() {
+
+  useEffect(() => {
+
+    const requestPermission = async () => {
+      await notifee.requestPermission();
+
+      const channelId = await notifee.createChannel({
+        id: 'crudNotifications',
+        name: 'Canal de notificações do app',
+      });
+    };
+
+    requestPermission();
+
+  }, [])
+
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName='Home'>
