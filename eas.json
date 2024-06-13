@@ -7,11 +7,14 @@
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "image": "ubuntu-18.04-jdk-11-ndk-r19c"
+        "image": "ubuntu-22.04-jdk-17-ndk-r25b"
       }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "image": "ubuntu-22.04-jdk-17-ndk-r25b"
+      }
     },
     "production": {}
   },
